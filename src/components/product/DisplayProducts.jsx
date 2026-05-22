@@ -7,7 +7,7 @@ export default function DisplayProducts(props)
   return (
     <div className='text-center mt-3 container'>
       {
-        products.length==0? <h1>There are no products added, please add some!</h1>:
+        products.length==0? <h1>There are no products added please add some!</h1>:
         <>
             <h1>Manage Your Products</h1>
             <table class="table table-hover table-bordered w-100">
