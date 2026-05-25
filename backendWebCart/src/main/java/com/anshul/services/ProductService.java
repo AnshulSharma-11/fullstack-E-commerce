@@ -166,6 +166,19 @@ public class ProductService {
 		List<Product> products=productRepository.findAll();
 		return response.send("following products found" , products, HttpStatus.OK);
 	}
+	public ResponseEntity<ResponseWrapper> getProductById( long productId)
+	{
+		Optional<Product> existingProduct = productRepository.findById(productId);
+		if(existingProduct.isPresent())
+		{
+			return response.send("following product found", existingProduct.get(), HttpStatus.OK);
+			
+		}
+		else
+		{
+			return response.send("following product not found", null, HttpStatus.NOT_FOUND);
+		}
+	}
 	
 
 }
