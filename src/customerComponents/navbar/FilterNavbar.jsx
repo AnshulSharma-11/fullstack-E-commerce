@@ -10,8 +10,8 @@ export default function FilterNavbar({ onFilterProducts }) {
     formState: { errors },
   } = useForm();
 
-  const [categories, setCategories] = useState([]);
-  const [subCategories, setSubCategories] = useState([]);
+  let [categories, setCategories] = useState([]);
+  let [subCategories, setSubCategories] = useState([]);
 
   const selectedCategoryId = watch("category");
 
