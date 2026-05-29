@@ -12,17 +12,38 @@ import UpdateProduct from './components/product/UpdateProduct.jsx';
 import ManageCategories from './components/category/ManageCategories.jsx';
 import ManageSubCategories from './components/subcategory/ManageSubCategories.jsx';
 import { ToastContainer, Zoom } from 'react-toastify';
+import Home from './customerComponents/Home.jsx';
+import FetchCustomerProducts from './customerComponents/product/FetchCustomerProducts.jsx';
+import DispalyCustomerProductDetails from './customerComponents/product/DispalyCustomerProductDetails.jsx';
 
 let projectRoutes = createBrowserRouter([
   {
-    path:"/vendor",
-    element:<App/>,
-    children:[
-      {element:<FetchProducts/>, index:true},
-      {path:"add-product", element:<AddProduct/>},
-      {path:"update-product", element:<UpdateProduct/>},
-      {path:"manage-categories", element:<ManageCategories/>},
-      {path:"manage-subcategories", element:<ManageSubCategories/>}
+    path: "/vendor",
+    element: <App />,
+    children: [
+      {
+        element: <FetchProducts />, index: true
+      },
+      { path: "add-product", element: <AddProduct /> },
+      { path: "update-product/:id", element: <UpdateProduct /> },
+      { path: "manage-categories", element: <ManageCategories /> },
+      { path: "manage-subcategories", element: <ManageSubCategories /> }
+    ],
+    
+    
+  },
+  {
+    path: "/",
+    element: <Home/>,
+    children: [
+      {
+        element: <FetchCustomerProducts />, index: true
+      },
+      {
+        path:"/:id",
+        element:<DispalyCustomerProductDetails/>
+      }
+
     ]
   }
 ])
@@ -33,16 +54,16 @@ root.render(
     <RouterProvider router={projectRoutes}>
     </RouterProvider>
     <ToastContainer
-            position="top-right"
-            autoClose={2000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick={false}
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-            transition={Zoom}/>
+      position="top-right"
+      autoClose={2000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick={false}
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"
+      transition={Zoom} />
   </>
 );

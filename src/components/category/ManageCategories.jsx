@@ -22,17 +22,17 @@ export default function ManageCategories() {
     <div className=''>
       <div className='d-flex mt-5 justify-content-center'>
         <form className='d-flex w-50' onSubmit={handleSubmit(collectFormData)}>
-          <input type="number" class="form-control me-3 border border-2 w-25" placeholder='Category Id' 
+          <input type="number" className="form-control me-3 border border-2 w-25" placeholder='Category Id' 
           {...register("id",
                         {required:{value:true, message:"category id and "}})}/>
 
-          <input type="text" class="form-control me-3 border border-2" placeholder='Category Name' 
+          <input type="text" className="form-control me-3 border border-2" placeholder='Category Name' 
             {...register("name",
                         {required:{value:true, message:"category name is required"},
                         minLength:{value:3, message:"Min 3 characters required"}, 
                         maxLength:{value:10, message:"Max 10 characters allowed"}})}/>
             
-          <input type="submit" class="btn btn-primary"/>
+          <input type="submit" className="btn btn-primary"/>
         </form>
       </div>
       <div className="form-text text-danger text-center">
