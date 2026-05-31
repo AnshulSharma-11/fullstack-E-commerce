@@ -123,7 +123,7 @@ export default function FilterNavbar({ onFilterProducts }) {
           className="form-select"
           {...register("sortDirection")}
         >
-          <option value="">Sort By Price</option>
+          <option value="">Sort By Price up</option>
           <option value="asc">Low To High</option>
           <option value="desc">High To Low</option>
         </select>
