@@ -11,7 +11,8 @@ import com.anshul.entities.Product;
 import com.anshul.entities.Vendor;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> , JpaSpecificationExecutor<Product>{
+public interface ProductRepository extends JpaRepository<Product, Long> , JpaSpecificationExecutor<Product>
+{
 
 	List<Product> findAllByVendor(Vendor vendor);
 

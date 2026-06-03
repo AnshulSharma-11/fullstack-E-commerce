@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -184,16 +185,23 @@ public class ProductService {
 		}
 	}
 	
-	public ResponseEntity<ResponseWrapper> filterProducts(String ctegoryName,String subCategoryName,String sortDirection)
+	public ResponseEntity<ResponseWrapper> filterProducts(
+			String categoryName,
+			String subCategoryName,
+			String sortDirection,
+			String productName)
 	{
 		Specification<Product> productAllFilters=Specification.where(
-				ProductSpecification.hasCategory(ctegoryName)
+				ProductSpecification.hasCategory(categoryName)
 				.and(ProductSpecification.hasSubCategory(subCategoryName))
 				.and(ProductSpecification.sortByPrice(sortDirection))
+				.and(ProductSpecification.hasProductName(productName))
 				);
 		List<Product> filteredProducts=productRepository.findAll(productAllFilters);
-		return response.send("following products found", filteredProducts, HttpStatus.OK);
+		return response.send("Following products found", filteredProducts, HttpStatus.OK);
 	}
+	
+
 	
 
 }

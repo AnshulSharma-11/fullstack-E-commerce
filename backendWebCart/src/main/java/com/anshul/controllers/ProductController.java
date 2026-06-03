@@ -78,13 +78,13 @@ public class ProductController {
 	
 	@GetMapping("/products/filter")
 	public ResponseEntity<ResponseWrapper> filterProducts(
-			@RequestParam(value =  "categoryName",required = false) String categoryName,
-			@RequestParam(value =  "subCategoryName",required = false) String subCategoryName,
-			@RequestParam(value =  "sortdirection",required = false) String sortDirection) 
+			@RequestParam(value = "categoryName",required = false) String categoryName,
+			@RequestParam(value = "subCategoryName",required = false)String subCategoryName,
+			@RequestParam(value = "sortDirection",required = false) String sortDirection,
+			@RequestParam(value = "productName",required = false) String productName)
 	{
-		return productService.filterProducts(categoryName,subCategoryName,sortDirection);
+		return productService.filterProducts(categoryName,subCategoryName,sortDirection,productName);
 	}
-	
 }
 
 

@@ -8,11 +8,13 @@ import com.anshul.entities.SubCategory;
 
 import jakarta.persistence.criteria.Join;
 
-public class ProductSpecification 
+
+
+public class ProductSpecification
 {
 	public static Specification<Product> hasCategory(String categoryName)
 	{
-		return (root , query , cb)->
+		return (root, query, cb)->
 		{
 			if(categoryName==null || categoryName.isBlank())
 			{
@@ -20,15 +22,16 @@ public class ProductSpecification
 			}
 			else
 			{
-				Join<Product, SubCategory> productSubCateJoin=root.join("subCategory");
-				Join<SubCategory, Category> productCateJoin=productSubCateJoin.join("category");
-				return cb.equal(cb.lower(productCateJoin.get("name")), categoryName.toLowerCase());
+				Join<Product, SubCategory> productSubcategoryJoin =root.join("subCategory");
+				Join<SubCategory, Category> productCategoryJoin=productSubcategoryJoin.join("category");
+				return cb.equal(cb.lower(productCategoryJoin.get("name")), categoryName.toLowerCase());
 			}
 		};
 	}
+	
 	public static Specification<Product> hasSubCategory(String subCategoryName)
 	{
-		return (root , query , cb)->
+		return (root, query, cb)->
 		{
 			if(subCategoryName==null || subCategoryName.isBlank())
 			{
@@ -36,16 +39,15 @@ public class ProductSpecification
 			}
 			else
 			{
-				Join<Product, SubCategory> productSubCateJoin=root.join("subCategory");
-				//Join<SubCategory, Category> productCateJoin=productSubCateJoin.join("category");
-				return cb.equal(cb.lower(productSubCateJoin.get("name")), subCategoryName.toLowerCase());
+				Join<Product, SubCategory> productSubcategoryJoin =root.join("subCategory");
+				return cb.equal(cb.lower(productSubcategoryJoin.get("name")), subCategoryName.toLowerCase());
 			}
 		};
 	}
-
+	
 	public static Specification<Product> sortByPrice(String sortDirection)
 	{
-		return (root , query , cb)->
+		return (root, query, cb)->
 		{
 			if(sortDirection==null || sortDirection.isBlank())
 			{
@@ -53,7 +55,7 @@ public class ProductSpecification
 			}
 			if(sortDirection.equalsIgnoreCase("asc"))
 			{
-				query.orderBy(cb.asc(root.get("price")));
+				 query.orderBy(cb.asc(root.get("price")));
 			}
 			else
 			{
@@ -62,4 +64,20 @@ public class ProductSpecification
 			return null;
 		};
 	}
+
+	
+	public static Specification<Product> hasProductName(String productName)
+	{
+		return (root, query, cb)->
+		{
+			if(productName==null || productName.isBlank())
+			{
+				return null;
+			}
+			return cb.like(cb.lower(root.get("name")), "%"+productName.toLowerCase()+"%");
+		};
+	}
 }
+	
+	
+	

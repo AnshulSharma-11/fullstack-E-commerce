@@ -2,7 +2,9 @@ package com.anshul.entities;
 
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,7 +30,8 @@ public class SubCategory {
 	@ManyToOne
 	@JoinColumn(name="category_id")
 	//@JsonBackReference
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	//@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@JsonIgnoreProperties("subCategories")
 	private Category category;
 	
 	
