@@ -68,8 +68,7 @@ public class ProductController {
 		return productService.getAllProducts();
 		
 	}
-
-
+	
 	@GetMapping("/products/{id}")
 	public ResponseEntity<ResponseWrapper> getProductById(@PathVariable("id") long productId)
 	{
@@ -77,6 +76,16 @@ public class ProductController {
 	}
 
 	
+	@GetMapping("/products/filter")
+	public ResponseEntity<ResponseWrapper> filterProducts(
+			@RequestParam(value =  "categoryName",required = false) String categoryName,
+			@RequestParam(value =  "subCategoryName",required = false) String subCategoryName,
+			@RequestParam(value =  "sortdirection",required = false) String sortDirection) 
+	{
+		return productService.filterProducts(categoryName,subCategoryName,sortDirection);
+	}
 	
-
 }
+
+
+

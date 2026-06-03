@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ import com.anshul.repositories.SubCategoryRepository;
 import com.anshul.repositories.VendorRepository;
 import com.anshul.response_wrapper.ResponseWrapper;
 import com.anshul.response_wrapper.UniversalResponse;
+import com.anshul.specifications.ProductSpecification;
 
 import tools.jackson.databind.ObjectMapper;
 
@@ -108,7 +110,7 @@ public class ProductService {
 			{
 				return response.send("Product not deleted!", null, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
-		}
+	}
 
 	public ResponseEntity<ResponseWrapper> getProductById(Long vendorId, Long productId)
 	{
@@ -166,6 +168,8 @@ public class ProductService {
 		List<Product> products=productRepository.findAll();
 		return response.send("following products found" , products, HttpStatus.OK);
 	}
+	
+	
 	public ResponseEntity<ResponseWrapper> getProductById( long productId)
 	{
 		Optional<Product> existingProduct = productRepository.findById(productId);
@@ -178,6 +182,17 @@ public class ProductService {
 		{
 			return response.send("following product not found", null, HttpStatus.NOT_FOUND);
 		}
+	}
+	
+	public ResponseEntity<ResponseWrapper> filterProducts(String ctegoryName,String subCategoryName,String sortDirection)
+	{
+		Specification<Product> productAllFilters=Specification.where(
+				ProductSpecification.hasCategory(ctegoryName)
+				.and(ProductSpecification.hasSubCategory(subCategoryName))
+				.and(ProductSpecification.sortByPrice(sortDirection))
+				);
+		List<Product> filteredProducts=productRepository.findAll(productAllFilters);
+		return response.send("following products found", filteredProducts, HttpStatus.OK);
 	}
 	
 
