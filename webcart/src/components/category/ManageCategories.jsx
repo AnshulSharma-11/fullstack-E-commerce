@@ -7,8 +7,7 @@ export default function ManageCategories() {
   async function collectFormData(formData)
     {
       console.log(formData);
-      //      let response=await fetch("http://localhost:8080/api/v1/vendor/categories",
-
+      //  let response=await fetch("http://localhost:8080/api/v1/vendor/categories",
       let response=await fetch("http://localhost:8080/api/v1/get/categories",
         {
           method:"post",
